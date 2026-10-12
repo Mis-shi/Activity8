@@ -3,114 +3,337 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BARLONGO CREATIVE'S - GALLERY</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>BARLONGO CREATIVE'S - CONTACT</title>
     <style>
-        html { scroll-behavior: smooth; background-color: #140a23; }
-        /* Hide the scrollbar (page can still be scrolled with mouse wheel/touch) */
-        html, body { scrollbar-width: none; -ms-overflow-style: none; }
-        html::-webkit-scrollbar, body::-webkit-scrollbar { display: none; width: 0; height: 0; }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        /* ---------- Basic setup ---------- */
+        html {
+            background-color: #140a23;
+            -webkit-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
-            min-height: 100vh; overflow-x: hidden; position: relative;
-        }
-
-        /*  */
-        #bg-video {
-            position: fixed; top: 50%; left: 50%; min-width: 100%; min-height: 100%;
-            width: auto; height: auto; z-index: -2; transform: translate(-50%, -50%); object-fit: cover;
-        }
-        .video-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(20, 10, 35, 0.5); z-index: -1;
-        }
-
-        /* Header, Navigator */
-        header { width: 100%; background-color: #3e1f2b; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); }
-        .header-brand { display: flex; align-items: center; justify-content: center; gap: 12px; padding: 14px 30px; border-bottom: 1px solid rgba(255, 255, 255, 0.6); }
-        .header-logo { width: 34px; height: 34px; border-radius: 50%; object-fit: cover; }
-        .header-brand span { color: #f5f5f5; font-size: 17px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px; }
-        .navbar { display: flex; justify-content: center; gap: 30px; padding: 10px 30px 14px 30px; background-color: rgba(255, 255, 255, 0.08); }
-        .navbar a {
-            color: #e8d9dd; text-decoration: none; font-size: 13px; font-weight: bold;
-            text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 2px solid transparent; padding-bottom: 6px;
-            transition: color 0.2s, border-color 0.2s;
-        }
-        .navbar a:hover { color: #ffffff; }
-        .navbar a.active { color: #ffffff; border-bottom: 2px solid #ffd700; }
-
-        /* Main Layout & Gallery Card (same size and position as Home and About) */
-        main { flex: 1; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding: 20px 0; }
-        .card {
-            background: #ffffff; backdrop-filter: blur(12px); padding: 40px;
-            border-radius: 20px; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35); max-width: 900px; width: 90%;
-            margin: 20px auto; text-align: center; border: 1px solid rgba(0, 0, 0, 0.08);
-            height: 635px; /* fixed size, same as Home and About */
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-        }
-
-        h1 { color: #4a154b; font-size: 26px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
-        .subtitle { color: #666666; font-size: 14px; margin-bottom: 30px; }
-
-        /* Gallery Grid (4 columns x 3 rows) */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 25px 20px;
-            justify-items: center;
-            width: 100%;
-        }
-
-        .gallery-item {
             display: flex;
             flex-direction: column;
             align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
         }
 
-        .gallery-img {
-            width: 110px;
-            height: 110px;
-            border-radius: 50%;
+        /* ---------- Background video ---------- */
+        #bg-video {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            transform: translate(-50%, -50%);
             object-fit: cover;
-            border: 3px solid #3e1f2b;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            z-index: -2;
         }
 
-        .gallery-img:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+        .video-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(20, 10, 35, 0.5);
+            z-index: -1;
         }
 
-        .item-title {
-            margin-top: 10px;
+        /* ---------- Header and navigation ---------- */
+        header {
+            width: 100%;
+            background-color: #3e1f2b;
+        }
+
+        .header-brand {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 14px 30px;
+            border-bottom: 1px solid white;
+        }
+
+        .header-logo {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+        }
+
+        .header-brand span {
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            padding: 10px 30px 14px 30px;
+        }
+
+        .navbar a {
+            color: #e8d9dd;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: bold;
+            padding-bottom: 6px;
+            border-bottom: 2px solid transparent;
+        }
+
+        .navbar a:hover {
+            color: white;
+        }
+
+        .navbar a.active {
+            color: white;
+            border-bottom: 2px solid #ffd700;
+        }
+
+        /* ---------- White card ---------- */
+        main {
+            flex: 1;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            padding: 20px 0;
+        }
+
+        .card {
+            background-color: white;
+            width: 90%;
+            max-width: 900px;
+            min-height: 635px;
+            margin: 20px auto;
+            padding: 40px 5%;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        h1 {
+            color: #4a154b;
+            font-size: 26px;
+            text-transform: uppercase;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 14px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        /* two columns: details on the left, form on the right */
+        .columns {
+            display: flex;
+            gap: 5%;
+            width: 100%;
+        }
+
+        .contact-details {
+            width: 40%;
+            overflow-wrap: break-word;
+        }
+
+        .contact-form {
+            width: 55%;
+        }
+
+        .contact-details h2 {
+            color: #4a154b;
+            font-size: 16px;
+            text-transform: uppercase;
+            margin-bottom: 18px;
+        }
+
+        .detail {
+            margin-bottom: 18px;
+        }
+
+        .detail h3 {
+            color: #3e1f2b;
+            font-size: 11px;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .detail p {
+            color: #333;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        /* ---------- Form ---------- */
+        .field {
+            margin-bottom: 14px;
+        }
+
+        label {
+            display: block;
+            color: #3e1f2b;
             font-size: 11px;
             font-weight: bold;
-            color: #3e1f2b;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            margin-bottom: 5px;
         }
 
-        /* Responsive Breakpoints */
-        @media (max-width: 768px) {
-            .card { height: auto; min-height: 635px; }
-            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
-        }
-        @media (max-width: 480px) {
-            .gallery-grid { grid-template-columns: repeat(1, 1fr); }
+        input, textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 16px;
         }
 
-        footer { background-color: #3e1f2b; color: white; text-align: center; padding: 15px; font-size: 12px; width: 100%; }
+        textarea {
+            height: 100px;
+            resize: none;
+        }
+
+        /* red style when there is a mistake */
+        .invalid input, .invalid textarea {
+            border-color: #c0392b;
+            background-color: #fff6f5;
+        }
+
+        .error-text {
+            display: none;
+            color: #c0392b;
+            font-size: 12px;
+            margin-top: 4px;
+        }
+
+        .invalid .error-text {
+            display: block;
+        }
+
+        button {
+            width: 100%;
+            padding: 13px;
+            background-color: black;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #3e1f2b;
+        }
+
+        .fail-message {
+            display: none;
+            margin-top: 12px;
+            padding: 10px 12px;
+            border-radius: 8px;
+            background-color: #fdecea;
+            color: #c0392b;
+            font-size: 13px;
+        }
+
+        /* ---------- "Done Fill Up" popup ---------- */
+        .popup-background {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(20, 10, 35, 0.7);
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            z-index: 100;
+        }
+
+        .popup-box {
+            background-color: white;
+            width: 100%;
+            max-width: 340px;
+            padding: 30px 26px;
+            border-radius: 16px;
+            text-align: center;
+        }
+
+        .popup-check {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 14px auto;
+            border-radius: 50%;
+            background-color: #e8f6ec;
+            color: #1e7a3c;
+            font-size: 36px;
+            line-height: 64px;
+        }
+
+        .popup-box h2 {
+            color: #4a154b;
+            font-size: 22px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .popup-box p {
+            color: #444;
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            overflow-wrap: break-word;
+        }
+
+        /* ---------- Footer ---------- */
+        footer {
+            width: 100%;
+            background-color: black;
+            color: white;
+            text-align: center;
+            font-size: 12px;
+            padding: 15px;
+        }
     </style>
 </head>
 <body>
-    <!-- Background Video & Overlay -->
-    <video autoplay loop muted playsinline id="bg-video"><source src="violet.mp4" type="video/mp4"></video>
+
+    <!-- Popup that shows after the form is sent -->
+    <div class="popup-background" id="popup">
+        <div class="popup-box">
+            <div class="popup-check">&#10003;</div>
+            <h2>Done Fill Up!</h2>
+            <p id="popupText">Your message was sent.</p>
+            <button type="button" id="popupButton">OK</button>
+        </div>
+    </div>
+
+    <!-- Background video -->
+    <video autoplay loop muted playsinline id="bg-video">
+        <source src="violet.mp4" type="video/mp4">
+    </video>
     <div class="video-overlay"></div>
 
-    <!-- Header & Navigation Bar -->
+    <!-- Header and navigation bar -->
     <header>
         <div class="header-brand">
             <img src="logo.png" alt="Logo" class="header-logo">
@@ -119,79 +342,260 @@
         <nav class="navbar">
             <a href="Activity5.html">HOME</a>
             <a href="Activity6.html">ABOUT</a>
-            <a href="index.html" class="active">GALLERY</a>
-            <a href="Activity8_Barlongo.html">CONTACT</a>
+            <a href="Activity7.html">GALLERY</a>
+            <a href="index.html" class="active">CONTACT</a>
         </nav>
     </header>
 
-    <!-- Main Content Card -->
+    <!-- Main content -->
     <main>
         <div class="card">
-            <h1>Creative Portfolio</h1>
-            <p class="subtitle">A curated look at our latest collections and artistic ventures.</p>
+            <h1>Get In Touch</h1>
+            <p class="subtitle">Have a question or a project in mind? Reach out to us below.</p>
 
-            <div class="gallery-grid">
-                <div class="gallery-item">
-                    <img src="1.jpg" alt="Project 01" class="gallery-img">
-                    <span class="item-title">PROJECT 01</span>
+            <div class="columns">
+
+                <!-- Left side: contact details -->
+                <div class="contact-details">
+                    <h2>Contact Details</h2>
+
+                    <div class="detail">
+                        <h3>Email</h3>
+                        <p>20253713@s.ubaguio.edu</p>
+                    </div>
+
+                    <div class="detail">
+                        <h3>Studio Address</h3>
+                        <p>Poblacion, La Trinidad<br>Benguet, Philippines</p>
+                    </div>
+
+                    <div class="detail">
+                        <h3>Business Hours</h3>
+                        <p>Mon - Fri: 9:00 AM - 6:00 PM</p>
+                    </div>
+
+                    <div class="detail">
+                        <h3>Phone</h3>
+                        <p>0962 360 3501</p>
+                    </div>
                 </div>
-                <div class="gallery-item">
-                    <img src="2.jpg" alt="Project 02" class="gallery-img">
-                    <span class="item-title">PROJECT 02</span>
+
+                <!-- Right side: the form -->
+                <div class="contact-form">
+                    <form id="contactForm">
+
+                        <div class="field" id="fullnameBox">
+                            <label for="fullname">Full Name</label>
+                            <input type="text" id="fullname" placeholder="Your Name">
+                            <p class="error-text" id="fullnameError"></p>
+                        </div>
+
+                        <div class="field" id="emailBox">
+                            <label for="email">Email Address</label>
+                            <input type="text" id="email" placeholder="email@example.com">
+                            <p class="error-text" id="emailError"></p>
+                        </div>
+
+                        <div class="field" id="messageBox">
+                            <label for="message">Comments / Message</label>
+                            <textarea id="message" placeholder="Write your message here..."></textarea>
+                            <p class="error-text" id="messageError"></p>
+                        </div>
+
+                        <button type="submit" id="sendButton">Send Message</button>
+                        <p class="fail-message" id="failMessage">Your message could not be sent. Check your internet and try again.</p>
+
+                    </form>
                 </div>
-                <div class="gallery-item">
-                    <img src="3.jpg" alt="Project 03" class="gallery-img">
-                    <span class="item-title">PROJECT 03</span>
-                </div>
-                <div class="gallery-item">
-                    <img src="4.jpg" alt="Project 04" class="gallery-img">
-                    <span class="item-title">PROJECT 04</span>
-                </div>
-                <div class="gallery-item">
-                    <img src="5.jpg" alt="Project 05" class="gallery-img">
-                    <span class="item-title">PROJECT 05</span>
-                </div>
-                <div class="gallery-item">
-                    <img src="6.jpg" alt="Project 06" class="gallery-img">
-                    <span class="item-title">PROJECT 06</span>
-                </div>
-                <div class="gallery-item">
-                    <img src="7.jpg" alt="Project 07" class="gallery-img">
-                    <span class="item-title">PROJECT 07</span>
-                </div>
-                <div class="gallery-item">
-                    <img src="Barlongo.png" alt="Project 08" class="gallery-img">
-                    <span class="item-title">PROJECT 08</span>
-                </div>
-                <div class="gallery-item">
-                    <img src="9.jpg" alt="Project 09" class="gallery-img">
-                    <span class="item-title">PROJECT 09</span>
-                </div>
-                <div class="gallery-item">
-                    <img src="10.jpg" alt="Project 10" class="gallery-img">
-                    <span class="item-title">PROJECT 10</span>
-                </div>
-                <div class="gallery-item">
-                    <img src="11.jpg" alt="Project 11" class="gallery-img">
-                    <span class="item-title">PROJECT 11</span>
-                </div>
-                <div class="gallery-item">
-                    <img src="12.jpg" alt="Project 12" class="gallery-img">
-                    <span class="item-title">PROJECT 12</span>
-                </div>
+
             </div>
         </div>
     </main>
 
     <footer>&copy; 2026 Barlongo Creatives | All Rights Reserved</footer>
-    <!-- Highlight the nav link of the page you are currently on -->
+
     <script>
-        (function () {
-            var current = location.pathname.split('/').pop() || 'index.html';
-            document.querySelectorAll('.navbar a').forEach(function (link) {
-                link.classList.toggle('active', link.getAttribute('href') === current);
+        // The email that will RECEIVE the messages from the form
+        var OWNER_EMAIL = '20253713@s.ubaguio.edu';
+
+        var form = document.getElementById('contactForm');
+        var sendButton = document.getElementById('sendButton');
+        var failMessage = document.getElementById('failMessage');
+        var popup = document.getElementById('popup');
+
+        // Show a red error message under a field
+        function showError(fieldId, message) {
+            document.getElementById(fieldId + 'Box').className = 'field invalid';
+            document.getElementById(fieldId + 'Error').textContent = message;
+        }
+
+        // Remove the error message of a field
+        function clearError(fieldId) {
+            document.getElementById(fieldId + 'Box').className = 'field';
+            document.getElementById(fieldId + 'Error').textContent = '';
+        }
+
+        // Check the full name
+        function checkName() {
+            var name = document.getElementById('fullname').value.trim();
+
+            if (name === '') {
+                showError('fullname', 'Please enter your full name.');
+                return false;
+            }
+            if (name.length < 2) {
+                showError('fullname', 'Your name is too short. Enter at least 2 letters.');
+                return false;
+            }
+            if (/[0-9]/.test(name)) {
+                showError('fullname', 'Your name should not have numbers.');
+                return false;
+            }
+
+            clearError('fullname');
+            return true;
+        }
+
+        // Check the email address
+        function checkEmail() {
+            var email = document.getElementById('email').value.trim();
+
+            if (email === '') {
+                showError('email', 'Please enter your email address.');
+                return false;
+            }
+            if (email.indexOf(' ') !== -1) {
+                showError('email', 'Your email should not have spaces.');
+                return false;
+            }
+            if (email.indexOf('@') === -1) {
+                showError('email', 'Your email is missing the @ symbol (example: name@gmail.com).');
+                return false;
+            }
+
+            var parts = email.split('@');
+
+            if (parts.length > 2) {
+                showError('email', 'Your email has more than one @ symbol.');
+                return false;
+            }
+            if (parts[0] === '') {
+                showError('email', 'Your email needs a name before the @ symbol.');
+                return false;
+            }
+            if (parts[1] === '') {
+                showError('email', 'Your email needs a domain after the @ symbol (example: gmail.com).');
+                return false;
+            }
+            if (parts[1].indexOf('.') === -1) {
+                showError('email', 'Your email is missing a dot after the @ (example: gmail.com).');
+                return false;
+            }
+
+            var lastDot = parts[1].lastIndexOf('.');
+            if (parts[1].length - lastDot - 1 < 2) {
+                showError('email', 'The ending of your email is not complete (example: .com).');
+                return false;
+            }
+
+            clearError('email');
+            return true;
+        }
+
+        // Check the message
+        function checkMessage() {
+            var message = document.getElementById('message').value.trim();
+
+            if (message === '') {
+                showError('message', 'Please write your message.');
+                return false;
+            }
+            if (message.length < 10) {
+                showError('message', 'Your message is too short. Write at least 10 characters.');
+                return false;
+            }
+
+            clearError('message');
+            return true;
+        }
+
+        // When the user types again, check that field again
+        document.getElementById('fullname').oninput = checkName;
+        document.getElementById('email').oninput = checkEmail;
+        document.getElementById('message').oninput = checkMessage;
+
+        // Put the button back to normal
+        function resetButton() {
+            sendButton.disabled = false;
+            sendButton.textContent = 'Send Message';
+        }
+
+        // When the Send Message button is clicked
+        form.onsubmit = function (event) {
+            event.preventDefault();
+            failMessage.style.display = 'none';
+
+            // check all fields
+            var nameOk = checkName();
+            var emailOk = checkEmail();
+            var messageOk = checkMessage();
+
+            // stop if there is a mistake
+            if (nameOk === false || emailOk === false || messageOk === false) {
+                return;
+            }
+
+            var name = document.getElementById('fullname').value.trim();
+            var email = document.getElementById('email').value.trim();
+            var message = document.getElementById('message').value.trim();
+
+            sendButton.disabled = true;
+            sendButton.textContent = 'Sending...';
+
+            // the information that will be sent to your email
+            var data = {
+                name: name,
+                email: email,
+                message: message,
+                _subject: 'New message from the Barlongo Creatives website',
+                _template: 'table',
+                _captcha: 'false',
+                _autoresponse: 'Hi! Thank you for your form submission.'
+            };
+
+            // send it using FormSubmit
+            fetch('https://formsubmit.co/ajax/' + OWNER_EMAIL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (result) {
+                resetButton();
+                if (result.success === 'true' || result.success === true) {
+                    document.getElementById('popupText').textContent = 'Thank you, ' + name + '! Your form has been submitted.';
+                    popup.style.display = 'flex';
+                    form.reset();
+                } else {
+                    failMessage.style.display = 'block';
+                }
+            })
+            .catch(function () {
+                resetButton();
+                failMessage.style.display = 'block';
             });
-        })();
+        };
+
+        // Close the popup
+        document.getElementById('popupButton').onclick = function () {
+            popup.style.display = 'none';
+        };
     </script>
+
 </body>
 </html>
