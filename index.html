@@ -5,11 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BARLONGO CREATIVE'S - CONTACT</title>
     <style>
-        /* ---------- Basic setup ---------- */
         html {
             background-color: #140a23;
             -webkit-text-size-adjust: 100%;
             text-size-adjust: 100%;
+        }
+
+        html, body {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        html::-webkit-scrollbar, body::-webkit-scrollbar {
+            display: none;
         }
 
         * {
@@ -27,7 +34,6 @@
             overflow-x: hidden;
         }
 
-        /* ---------- Background video ---------- */
         #bg-video {
             position: fixed;
             top: 50%;
@@ -49,7 +55,6 @@
             z-index: -1;
         }
 
-        /* ---------- Header and navigation ---------- */
         header {
             width: 100%;
             background-color: #3e1f2b;
@@ -102,7 +107,6 @@
             border-bottom: 2px solid #ffd700;
         }
 
-        /* ---------- White card ---------- */
         main {
             flex: 1;
             width: 100%;
@@ -141,7 +145,6 @@
             margin-bottom: 30px;
         }
 
-        /* two columns: details on the left, form on the right */
         .columns {
             display: flex;
             gap: 5%;
@@ -181,7 +184,6 @@
             line-height: 1.5;
         }
 
-        /* ---------- Form ---------- */
         .field {
             margin-bottom: 14px;
         }
@@ -207,23 +209,11 @@
         textarea {
             height: 100px;
             resize: none;
+            scrollbar-width: none;
         }
 
-        /* red style when there is a mistake */
-        .invalid input, .invalid textarea {
-            border-color: #c0392b;
-            background-color: #fff6f5;
-        }
-
-        .error-text {
+        textarea::-webkit-scrollbar {
             display: none;
-            color: #c0392b;
-            font-size: 12px;
-            margin-top: 4px;
-        }
-
-        .invalid .error-text {
-            display: block;
         }
 
         button {
@@ -244,17 +234,6 @@
             background-color: #3e1f2b;
         }
 
-        .fail-message {
-            display: none;
-            margin-top: 12px;
-            padding: 10px 12px;
-            border-radius: 8px;
-            background-color: #fdecea;
-            color: #c0392b;
-            font-size: 13px;
-        }
-
-        /* ---------- "Done Fill Up" popup ---------- */
         .popup-background {
             display: none;
             position: fixed;
@@ -304,7 +283,6 @@
             overflow-wrap: break-word;
         }
 
-        /* ---------- Footer ---------- */
         footer {
             width: 100%;
             background-color: black;
@@ -317,23 +295,20 @@
 </head>
 <body>
 
-    <!-- Popup that shows after the form is sent -->
     <div class="popup-background" id="popup">
         <div class="popup-box">
             <div class="popup-check">&#10003;</div>
             <h2>Done Fill Up!</h2>
-            <p id="popupText">Your message was sent.</p>
+            <p>Your message was sent successfully.</p>
             <button type="button" id="popupButton">OK</button>
         </div>
     </div>
 
-    <!-- Background video -->
     <video autoplay loop muted playsinline id="bg-video">
         <source src="violet.mp4" type="video/mp4">
     </video>
     <div class="video-overlay"></div>
 
-    <!-- Header and navigation bar -->
     <header>
         <div class="header-brand">
             <img src="logo.png" alt="Logo" class="header-logo">
@@ -347,15 +322,12 @@
         </nav>
     </header>
 
-    <!-- Main content -->
     <main>
         <div class="card">
             <h1>Get In Touch</h1>
             <p class="subtitle">Have a question or a project in mind? Reach out to us below.</p>
 
             <div class="columns">
-
-                <!-- Left side: contact details -->
                 <div class="contact-details">
                     <h2>Contact Details</h2>
 
@@ -380,34 +352,26 @@
                     </div>
                 </div>
 
-                <!-- Right side: the form -->
                 <div class="contact-form">
                     <form id="contactForm">
-
-                        <div class="field" id="fullnameBox">
+                        <div class="field">
                             <label for="fullname">Full Name</label>
-                            <input type="text" id="fullname" placeholder="Your Name">
-                            <p class="error-text" id="fullnameError"></p>
+                            <input type="text" id="fullname" name="name" placeholder="Your Name" required>
                         </div>
 
-                        <div class="field" id="emailBox">
+                        <div class="field">
                             <label for="email">Email Address</label>
-                            <input type="text" id="email" placeholder="email@example.com">
-                            <p class="error-text" id="emailError"></p>
+                            <input type="email" id="email" name="email" placeholder="email@example.com" required>
                         </div>
 
-                        <div class="field" id="messageBox">
+                        <div class="field">
                             <label for="message">Comments / Message</label>
-                            <textarea id="message" placeholder="Write your message here..."></textarea>
-                            <p class="error-text" id="messageError"></p>
+                            <textarea id="message" name="message" placeholder="Write your message here..." required></textarea>
                         </div>
 
                         <button type="submit" id="sendButton">Send Message</button>
-                        <p class="fail-message" id="failMessage">Your message could not be sent. Check your internet and try again.</p>
-
                     </form>
                 </div>
-
             </div>
         </div>
     </main>
@@ -415,183 +379,26 @@
     <footer>&copy; 2026 Barlongo Creatives | All Rights Reserved</footer>
 
     <script>
-        // The email that will RECEIVE the messages from the form
-        var OWNER_EMAIL = '20253713@s.ubaguio.edu';
+        const form = document.getElementById('contactForm');
+        const sendButton = document.getElementById('sendButton');
+        const popup = document.getElementById('popup');
 
-        var form = document.getElementById('contactForm');
-        var sendButton = document.getElementById('sendButton');
-        var failMessage = document.getElementById('failMessage');
-        var popup = document.getElementById('popup');
-
-        // Show a red error message under a field
-        function showError(fieldId, message) {
-            document.getElementById(fieldId + 'Box').className = 'field invalid';
-            document.getElementById(fieldId + 'Error').textContent = message;
-        }
-
-        // Remove the error message of a field
-        function clearError(fieldId) {
-            document.getElementById(fieldId + 'Box').className = 'field';
-            document.getElementById(fieldId + 'Error').textContent = '';
-        }
-
-        // Check the full name
-        function checkName() {
-            var name = document.getElementById('fullname').value.trim();
-
-            if (name === '') {
-                showError('fullname', 'Please enter your full name.');
-                return false;
-            }
-            if (name.length < 2) {
-                showError('fullname', 'Your name is too short. Enter at least 2 letters.');
-                return false;
-            }
-            if (/[0-9]/.test(name)) {
-                showError('fullname', 'Your name should not have numbers.');
-                return false;
-            }
-
-            clearError('fullname');
-            return true;
-        }
-
-        // Check the email address
-        function checkEmail() {
-            var email = document.getElementById('email').value.trim();
-
-            if (email === '') {
-                showError('email', 'Please enter your email address.');
-                return false;
-            }
-            if (email.indexOf(' ') !== -1) {
-                showError('email', 'Your email should not have spaces.');
-                return false;
-            }
-            if (email.indexOf('@') === -1) {
-                showError('email', 'Your email is missing the @ symbol (example: name@gmail.com).');
-                return false;
-            }
-
-            var parts = email.split('@');
-
-            if (parts.length > 2) {
-                showError('email', 'Your email has more than one @ symbol.');
-                return false;
-            }
-            if (parts[0] === '') {
-                showError('email', 'Your email needs a name before the @ symbol.');
-                return false;
-            }
-            if (parts[1] === '') {
-                showError('email', 'Your email needs a domain after the @ symbol (example: gmail.com).');
-                return false;
-            }
-            if (parts[1].indexOf('.') === -1) {
-                showError('email', 'Your email is missing a dot after the @ (example: gmail.com).');
-                return false;
-            }
-
-            var lastDot = parts[1].lastIndexOf('.');
-            if (parts[1].length - lastDot - 1 < 2) {
-                showError('email', 'The ending of your email is not complete (example: .com).');
-                return false;
-            }
-
-            clearError('email');
-            return true;
-        }
-
-        // Check the message
-        function checkMessage() {
-            var message = document.getElementById('message').value.trim();
-
-            if (message === '') {
-                showError('message', 'Please write your message.');
-                return false;
-            }
-            if (message.length < 10) {
-                showError('message', 'Your message is too short. Write at least 10 characters.');
-                return false;
-            }
-
-            clearError('message');
-            return true;
-        }
-
-        // When the user types again, check that field again
-        document.getElementById('fullname').oninput = checkName;
-        document.getElementById('email').oninput = checkEmail;
-        document.getElementById('message').oninput = checkMessage;
-
-        // Put the button back to normal
-        function resetButton() {
-            sendButton.disabled = false;
-            sendButton.textContent = 'Send Message';
-        }
-
-        // When the Send Message button is clicked
         form.onsubmit = function (event) {
             event.preventDefault();
-            failMessage.style.display = 'none';
-
-            // check all fields
-            var nameOk = checkName();
-            var emailOk = checkEmail();
-            var messageOk = checkMessage();
-
-            // stop if there is a mistake
-            if (nameOk === false || emailOk === false || messageOk === false) {
-                return;
-            }
-
-            var name = document.getElementById('fullname').value.trim();
-            var email = document.getElementById('email').value.trim();
-            var message = document.getElementById('message').value.trim();
-
-            sendButton.disabled = true;
             sendButton.textContent = 'Sending...';
 
-            // the information that will be sent to your email
-            var data = {
-                name: name,
-                email: email,
-                message: message,
-                _subject: 'New message from the Barlongo Creatives website',
-                _template: 'table',
-                _captcha: 'false',
-                _autoresponse: 'Hi! Thank you for your form submission.'
-            };
-
-            // send it using FormSubmit
-            fetch('https://formsubmit.co/ajax/' + OWNER_EMAIL, {
+            fetch('https://formsubmit.co/ajax/20253713@s.ubaguio.edu', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: JSON.stringify(data)
+                body: new FormData(form)
             })
-            .then(function (response) {
-                return response.json();
-            })
-            .then(function (result) {
-                resetButton();
-                if (result.success === 'true' || result.success === true) {
-                    document.getElementById('popupText').textContent = 'Thank you, ' + name + '! Your form has been submitted.';
-                    popup.style.display = 'flex';
-                    form.reset();
-                } else {
-                    failMessage.style.display = 'block';
-                }
-            })
-            .catch(function () {
-                resetButton();
-                failMessage.style.display = 'block';
+            .then(res => res.json())
+            .then(() => {
+                sendButton.textContent = 'Send Message';
+                popup.style.display = 'flex';
+                form.reset();
             });
         };
 
-        // Close the popup
         document.getElementById('popupButton').onclick = function () {
             popup.style.display = 'none';
         };
